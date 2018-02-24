@@ -4,9 +4,14 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 // application routes
-import index from '@/views/index'
+import register from '@/views/register'
+import login from '@/views/login'
+import protectedPage from '@/views/protected'
+
 const routes = [
-  { path: '/', name: 'index', component: index }
+  { path: '/', name: 'login', component: login },
+  { path: '/register', name: 'register', component: register },
+  { path: '/protected', name: 'protected', component: protectedPage }
 ]
 
 // export router instance

@@ -1,10 +1,10 @@
 <template>
-
+  <div>Protected page</div>
 </template>
 
 <script>
 export default {
-  name: 'index'
+  name: 'protected'
 }
 </script>
 
