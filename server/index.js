@@ -20,15 +20,10 @@ app.use(cors())
 mongoose.connect('mongodb://localhost/auth')
 
 // Use cookie-parser
-app.use(cookieParser)
+app.use(cookieParser())
 
 // Import API routes
 app.use('/api', api)
-
-app.get('/', (req, res) => {
-  console.log(req)
-  res.send('congrats!')
-})
 
 // Listen on the server
 app.listen(4000, () => {

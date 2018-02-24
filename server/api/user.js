@@ -10,7 +10,6 @@ router.post('/register', (req, res) => {
     email: req.body.email,
     password: req.body.password
   })
-  console.log('test')
   user.save((err, data) => {
     if (err) return res.send(err)
     res.json({ error: false })
@@ -18,20 +17,32 @@ router.post('/register', (req, res) => {
 })
 
 // Login route
-// router.post('/login', (req, res) => {
-//   let data = {
-//     email: req.body.email,
-//     password: req.body.password
-//   }
-//   console.log(data)
-//   User.findOne(data).lean().exec((err, user) => {
-//     if (err) return res.send(err)
-//     if (!user) return res.status(404).json({ 'message': 'User not found.' })
-//     let token = jwt.sign(user, process.env.SECRET, { expiresIn: 1440 })
-//     res.json({ error: false, token })
-//     // res.cookie('token', token, { maxAge: 900000, httpOnly: true })
-//     console.log(token)
-//   })
-// })
+router.post('/login', (req, res) => {
+  let data = {
+    email: req.body.email,
+    password: req.body.password
+  }
+  User.findOne(data).lean().exec((err, user) => {
+    if (err) return res.send(err)
+    if (!user) return res.status(404).json({ 'message': 'User not found.' })
+
+    // let token = jwt.sign(user, process.env.SECRET, { expiresIn: 1440 })
+    // res.cookie('cookie', 'this is my cookie', { maxAge: 900000 })
+
+    let oldCookie = req.cookies.test
+    let newCookie = (oldCookie | 0) + 1
+
+    res.status(200)
+      .cookie('test', newCookie, { maxAge: 9000000, httpOnly: false })
+      .json({ newCookie, oldCookie, reqCookie: req.cookies.test })
+
+    console.log('Login successful')
+  })
+})
+
+router.get('/', (req, res) => {
+  res.cookie('cooe', 'this is my cookie', { maxAge: 900000 })
+    .json({ b: 'b' })
+})
 
 export default router
