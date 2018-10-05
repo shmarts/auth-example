@@ -2,7 +2,6 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import mongoose from 'mongoose'
-import cookieParser from 'cookie-parser'
 import api from './api'
 // import jwt from 'jsonwebtoken'
 // import User from '/models/user'
@@ -18,9 +17,6 @@ app.use(cors())
 
 // Connect to mongo db
 mongoose.connect('mongodb://localhost/auth')
-
-// Use cookie-parser
-app.use(cookieParser())
 
 // Import API routes
 app.use('/api', api)

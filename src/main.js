@@ -3,9 +3,12 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import VueCookie from 'vue-cookie'
 import './assets/css/reset.css'
 
 Vue.config.productionTip = false
+
+Vue.use(VueCookie)
 
 /* eslint-disable no-new */
 new Vue({

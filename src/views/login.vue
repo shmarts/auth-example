@@ -8,8 +8,7 @@
 </template>
 
 <script>
-// import auth from '@/services/auth'
-import axios from 'axios'
+import auth from '@/services/auth'
 
 export default {
   name: 'login',
@@ -23,14 +22,8 @@ export default {
   methods: {
     async login () {
       try {
-        // const response = await auth.login({
-        //   email: this.email,
-        //   password: this.password
-        // })
-        // console.log(response)
-        let data = { email: this.email, password: this.password }
-        axios.post('https://localhost:4000/api/login', data)
-          .then((response) => console.log(response))
+        const response = await auth.login({ email: this.email, password: this.password })
+        this.$cookie.set('token', response.data.token, { expires: 3000 })
       } catch (error) {
         this.error = error.response.data
       }
